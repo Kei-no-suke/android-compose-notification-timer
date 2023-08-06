@@ -26,8 +26,8 @@ class ForegroundService: Service() {
     }
 
     private fun notification() : Notification {
-        val title = "Notification"
-        val contentText = "message"
+        val title = "Notification Timer"
+        val contentText = "ForegroundService is active"
         val channelId = CHANNEL_ID
         val channelName = "Foreground Channel"
         val channel = NotificationChannel(
@@ -37,15 +37,6 @@ class ForegroundService: Service() {
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.createNotificationChannel(channel)
 
-        val sendIntent = Intent(this, ForegroundService::class.java).apply {
-            action = Intent.ACTION_SEND
-        }
-        val sendPendingIntent = PendingIntent.getBroadcast(
-            this,
-            0,
-            sendIntent,
-            0 or PendingIntent.FLAG_IMMUTABLE
-        )
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
@@ -53,7 +44,6 @@ class ForegroundService: Service() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .setOngoing(true)
-
 
         notification.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 
