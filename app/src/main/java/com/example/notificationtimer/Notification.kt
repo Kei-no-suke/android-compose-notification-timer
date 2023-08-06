@@ -42,13 +42,11 @@ fun makeNotification(title: String, contentText: String, context: Context) {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             with(NotificationManagerCompat.from(context)) {
-                // notificationId is a unique int for each notification that you must define
                 notify(NOTIFICATION_ID, builder.build())
             }
         }
     }else{
         with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
             notify(NOTIFICATION_ID, builder.build())
         }
     }

@@ -2,6 +2,7 @@ package com.example.notificationtimer
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -20,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import com.example.notificationtimer.ui.theme.NotificationTimerTheme
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +68,23 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NotificationScreen(context: Context, modifier: Modifier = Modifier) {
+    val scheduler = AlarmScheduler(context)
     Column {
         Button(onClick = { makeNotification("Notification Timer", "Notification", context) }) {
             Text("Notification")
+        }
+        Button(onClick = { startNotifyForegroundService(context) }) {
+            Text("StartForegroundService")
+        }
+        Button(onClick = { stopNotifyForegroundService(context) }) {
+            Text("StopForegroundService")
+        }
+        Button(onClick = { scheduler.schedule(
+            LocalDateTime.now()
+            .plusSeconds(10).atZone(ZoneId.systemDefault()).toEpochSecond() * 1000
+        ) })
+        {
+            Text("Notify after 10 seconds")
         }
     }
 }
