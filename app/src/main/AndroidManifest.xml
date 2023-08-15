@@ -29,6 +29,9 @@
         <service android:name=".ForegroundService"
             android:enabled="true"
             android:exported="true" />
+        <service android:name=".SecondForegroundService"
+            android:enabled="true"
+            android:exported="true" />
         <receiver android:name=".AlarmReceiver" />
     </application>
 

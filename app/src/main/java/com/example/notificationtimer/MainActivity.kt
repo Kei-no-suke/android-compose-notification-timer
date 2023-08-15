@@ -79,6 +79,12 @@ fun NotificationScreen(context: Context, modifier: Modifier = Modifier) {
         Button(onClick = { stopNotifyForegroundService(context) }) {
             Text("StopForegroundService")
         }
+        Button(onClick = { startNotifySecondForegroundService(context) }) {
+            Text("StartSecondForegroundService")
+        }
+        Button(onClick = { stopNotifySecondForegroundService(context) }) {
+            Text("StopSecondForegroundService")
+        }
         Button(onClick = { scheduler.schedule(
             LocalDateTime.now()
             .plusSeconds(10).atZone(ZoneId.systemDefault()).toEpochSecond() * 1000
