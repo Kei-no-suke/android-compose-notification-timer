@@ -33,13 +33,16 @@ class MainActivity : ComponentActivity() {
                 ActivityResultContracts.RequestPermission(),
             ) { isGranted: Boolean ->
                 if (isGranted) {
-                    Toast.makeText(this, "Notifications permission granted", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(
+                        this,
+                        "通知：許可済",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     Toast.makeText(
                         this,
-                        "FCM can't post notifications without POST_NOTIFICATIONS permission",
-                        Toast.LENGTH_LONG,
+                        "通知：未許可",
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
             }
@@ -48,8 +51,7 @@ class MainActivity : ComponentActivity() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-
-                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
         setContent {
